@@ -8,18 +8,20 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { PageResponseAirplaneDto } from '../../models/page-response-airplane-dto';
+import { PageResponseScheduledCheckDto } from '../../models/page-response-scheduled-check-dto';
 
-export interface GetAllAirplanes$Params {
+export interface GetAllScheduledWorkByDate$Params {
   page?: number;
   size?: number;
+  date: string;
 }
 
-export function getAllAirplanes(http: HttpClient, rootUrl: string, params?: GetAllAirplanes$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseAirplaneDto>> {
-  const rb = new RequestBuilder(rootUrl, getAllAirplanes.PATH, 'get');
+export function getAllScheduledWorkByDate(http: HttpClient, rootUrl: string, params: GetAllScheduledWorkByDate$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseScheduledCheckDto>> {
+  const rb = new RequestBuilder(rootUrl, getAllScheduledWorkByDate.PATH, 'get');
   if (params) {
     rb.query('page', params.page, {});
     rb.query('size', params.size, {});
+    rb.query('date', params.date, {});
   }
 
   return http.request(
@@ -27,9 +29,9 @@ export function getAllAirplanes(http: HttpClient, rootUrl: string, params?: GetA
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<PageResponseAirplaneDto>;
+      return r as StrictHttpResponse<PageResponseScheduledCheckDto>;
     })
   );
 }
 
-getAllAirplanes.PATH = '/api/v1/airplanes';
+getAllScheduledWorkByDate.PATH = '/api/v1/scheduled-checks/all-scheduled-check/by/date';

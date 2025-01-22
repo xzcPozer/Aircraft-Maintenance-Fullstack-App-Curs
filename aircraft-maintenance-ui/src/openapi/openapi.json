@@ -156,7 +156,8 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -186,7 +187,8 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
+                  "type": "string",
+                  "format": "binary"
                 }
               }
             }
@@ -339,6 +341,57 @@
         }
       }
     },
+    "/api/v1/scheduled-checks/all-scheduled-check/by/date": {
+      "get": {
+        "tags": [
+          "ScheduledCheck"
+        ],
+        "operationId": "getAllScheduledWorkByDate",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseScheduledCheckDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/performed-works": {
       "get": {
         "tags": [
@@ -454,22 +507,92 @@
         }
       }
     },
-    "/api/v1/airplanes": {
+    "/api/v1/performed-works/my-performed-work/by/period": {
       "get": {
         "tags": [
-          "Airplane"
+          "PerformedWork"
         ],
-        "operationId": "getAllAirplanes",
+        "operationId": "getAllPerformedWorksByEngineerAuthIdAndDate",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "*/*": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/AirplaneDTO"
-                  }
+                  "$ref": "#/components/schemas/PageResponseAuthPerformedWorkDTO"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/airplanes": {
+      "get": {
+        "tags": [
+          "Airplane"
+        ],
+        "operationId": "getAllAirplanes",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResponseAirplaneDTO"
                 }
               }
             }
@@ -609,6 +732,8 @@
             "type": "string"
           },
           "description": {
+            "maxLength": 140,
+            "minLength": 0,
             "type": "string"
           },
           "completionDate": {
@@ -904,6 +1029,39 @@
           "yearOfRelease": {
             "type": "string",
             "format": "date"
+          }
+        }
+      },
+      "PageResponseAirplaneDTO": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AirplaneDTO"
+            }
+          },
+          "number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "first": {
+            "type": "boolean"
+          },
+          "last": {
+            "type": "boolean"
           }
         }
       },

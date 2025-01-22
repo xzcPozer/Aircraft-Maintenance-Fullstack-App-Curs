@@ -16,6 +16,8 @@ import { AddScheduledCheck$Params } from '../fn/scheduled-check/add-scheduled-ch
 import { ApiResponse } from '../models/api-response';
 import { getAllScheduledCheckByEngineerId } from '../fn/scheduled-check/get-all-scheduled-check-by-engineer-id';
 import { GetAllScheduledCheckByEngineerId$Params } from '../fn/scheduled-check/get-all-scheduled-check-by-engineer-id';
+import { getAllScheduledWorkByDate } from '../fn/scheduled-check/get-all-scheduled-work-by-date';
+import { GetAllScheduledWorkByDate$Params } from '../fn/scheduled-check/get-all-scheduled-work-by-date';
 import { getAllScheduledWorks } from '../fn/scheduled-check/get-all-scheduled-works';
 import { GetAllScheduledWorks$Params } from '../fn/scheduled-check/get-all-scheduled-works';
 import { getScheduledCheckById } from '../fn/scheduled-check/get-scheduled-check-by-id';
@@ -152,6 +154,31 @@ export class ScheduledCheckService extends BaseService {
    */
   getAllScheduledWorks(params?: GetAllScheduledWorks$Params, context?: HttpContext): Observable<PageResponseScheduledCheckDto> {
     return this.getAllScheduledWorks$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageResponseScheduledCheckDto>): PageResponseScheduledCheckDto => r.body)
+    );
+  }
+
+  /** Path part for operation `getAllScheduledWorkByDate()` */
+  static readonly GetAllScheduledWorkByDatePath = '/api/v1/scheduled-checks/all-scheduled-check/by/date';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllScheduledWorkByDate()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllScheduledWorkByDate$Response(params: GetAllScheduledWorkByDate$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseScheduledCheckDto>> {
+    return getAllScheduledWorkByDate(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllScheduledWorkByDate$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllScheduledWorkByDate(params: GetAllScheduledWorkByDate$Params, context?: HttpContext): Observable<PageResponseScheduledCheckDto> {
+    return this.getAllScheduledWorkByDate$Response(params, context).pipe(
       map((r: StrictHttpResponse<PageResponseScheduledCheckDto>): PageResponseScheduledCheckDto => r.body)
     );
   }

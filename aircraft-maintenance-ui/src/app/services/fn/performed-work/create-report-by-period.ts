@@ -8,14 +8,13 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ApiResponse } from '../../models/api-response';
 import { CreateReportByPeriodRequest } from '../../models/create-report-by-period-request';
 
 export interface CreateReportByPeriod$Params {
       body: CreateReportByPeriodRequest
 }
 
-export function createReportByPeriod(http: HttpClient, rootUrl: string, params: CreateReportByPeriod$Params, context?: HttpContext): Observable<StrictHttpResponse<ApiResponse>> {
+export function createReportByPeriod(http: HttpClient, rootUrl: string, params: CreateReportByPeriod$Params, context?: HttpContext): Observable<StrictHttpResponse<Blob>> {
   const rb = new RequestBuilder(rootUrl, createReportByPeriod.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/json');
@@ -26,7 +25,7 @@ export function createReportByPeriod(http: HttpClient, rootUrl: string, params: 
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<ApiResponse>;
+      return r as StrictHttpResponse<Blob>;
     })
   );
 }

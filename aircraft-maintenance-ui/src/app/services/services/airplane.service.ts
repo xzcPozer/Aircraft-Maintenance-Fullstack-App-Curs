@@ -18,6 +18,7 @@ import { getAirplaneBySerialNumber } from '../fn/airplane/get-airplane-by-serial
 import { GetAirplaneBySerialNumber$Params } from '../fn/airplane/get-airplane-by-serial-number';
 import { getAllAirplanes } from '../fn/airplane/get-all-airplanes';
 import { GetAllAirplanes$Params } from '../fn/airplane/get-all-airplanes';
+import { PageResponseAirplaneDto } from '../models/page-response-airplane-dto';
 
 @Injectable({ providedIn: 'root' })
 export class AirplaneService extends BaseService {
@@ -34,7 +35,7 @@ export class AirplaneService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllAirplanes$Response(params?: GetAllAirplanes$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<AirplaneDto>>> {
+  getAllAirplanes$Response(params?: GetAllAirplanes$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseAirplaneDto>> {
     return getAllAirplanes(this.http, this.rootUrl, params, context);
   }
 
@@ -44,9 +45,9 @@ export class AirplaneService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllAirplanes(params?: GetAllAirplanes$Params, context?: HttpContext): Observable<Array<AirplaneDto>> {
+  getAllAirplanes(params?: GetAllAirplanes$Params, context?: HttpContext): Observable<PageResponseAirplaneDto> {
     return this.getAllAirplanes$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<AirplaneDto>>): Array<AirplaneDto> => r.body)
+      map((r: StrictHttpResponse<PageResponseAirplaneDto>): PageResponseAirplaneDto => r.body)
     );
   }
 

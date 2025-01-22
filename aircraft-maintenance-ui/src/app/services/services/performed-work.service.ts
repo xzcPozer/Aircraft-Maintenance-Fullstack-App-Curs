@@ -18,6 +18,8 @@ import { createReportByPeriod } from '../fn/performed-work/create-report-by-peri
 import { CreateReportByPeriod$Params } from '../fn/performed-work/create-report-by-period';
 import { createReportByPeriodAndSerialNumber } from '../fn/performed-work/create-report-by-period-and-serial-number';
 import { CreateReportByPeriodAndSerialNumber$Params } from '../fn/performed-work/create-report-by-period-and-serial-number';
+import { getAllPerformedWorksByEngineerAuthIdAndDate } from '../fn/performed-work/get-all-performed-works-by-engineer-auth-id-and-date';
+import { GetAllPerformedWorksByEngineerAuthIdAndDate$Params } from '../fn/performed-work/get-all-performed-works-by-engineer-auth-id-and-date';
 import { getAllWorks } from '../fn/performed-work/get-all-works';
 import { GetAllWorks$Params } from '../fn/performed-work/get-all-works';
 import { getAllWorksByEngineerAuthId } from '../fn/performed-work/get-all-works-by-engineer-auth-id';
@@ -69,7 +71,7 @@ export class PerformedWorkService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  createReportByPeriod$Response(params: CreateReportByPeriod$Params, context?: HttpContext): Observable<StrictHttpResponse<ApiResponse>> {
+  createReportByPeriod$Response(params: CreateReportByPeriod$Params, context?: HttpContext): Observable<StrictHttpResponse<Blob>> {
     return createReportByPeriod(this.http, this.rootUrl, params, context);
   }
 
@@ -79,9 +81,9 @@ export class PerformedWorkService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  createReportByPeriod(params: CreateReportByPeriod$Params, context?: HttpContext): Observable<ApiResponse> {
+  createReportByPeriod(params: CreateReportByPeriod$Params, context?: HttpContext): Observable<Blob> {
     return this.createReportByPeriod$Response(params, context).pipe(
-      map((r: StrictHttpResponse<ApiResponse>): ApiResponse => r.body)
+      map((r: StrictHttpResponse<Blob>): Blob => r.body)
     );
   }
 
@@ -94,7 +96,7 @@ export class PerformedWorkService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  createReportByPeriodAndSerialNumber$Response(params: CreateReportByPeriodAndSerialNumber$Params, context?: HttpContext): Observable<StrictHttpResponse<ApiResponse>> {
+  createReportByPeriodAndSerialNumber$Response(params: CreateReportByPeriodAndSerialNumber$Params, context?: HttpContext): Observable<StrictHttpResponse<Blob>> {
     return createReportByPeriodAndSerialNumber(this.http, this.rootUrl, params, context);
   }
 
@@ -104,9 +106,9 @@ export class PerformedWorkService extends BaseService {
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  createReportByPeriodAndSerialNumber(params: CreateReportByPeriodAndSerialNumber$Params, context?: HttpContext): Observable<ApiResponse> {
+  createReportByPeriodAndSerialNumber(params: CreateReportByPeriodAndSerialNumber$Params, context?: HttpContext): Observable<Blob> {
     return this.createReportByPeriodAndSerialNumber$Response(params, context).pipe(
-      map((r: StrictHttpResponse<ApiResponse>): ApiResponse => r.body)
+      map((r: StrictHttpResponse<Blob>): Blob => r.body)
     );
   }
 
@@ -207,6 +209,31 @@ export class PerformedWorkService extends BaseService {
   getWorkByIdAndByEngineerAuthId(params: GetWorkByIdAndByEngineerAuthId$Params, context?: HttpContext): Observable<ApiResponse> {
     return this.getWorkByIdAndByEngineerAuthId$Response(params, context).pipe(
       map((r: StrictHttpResponse<ApiResponse>): ApiResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `getAllPerformedWorksByEngineerAuthIdAndDate()` */
+  static readonly GetAllPerformedWorksByEngineerAuthIdAndDatePath = '/api/v1/performed-works/my-performed-work/by/period';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllPerformedWorksByEngineerAuthIdAndDate()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllPerformedWorksByEngineerAuthIdAndDate$Response(params: GetAllPerformedWorksByEngineerAuthIdAndDate$Params, context?: HttpContext): Observable<StrictHttpResponse<PageResponseAuthPerformedWorkDto>> {
+    return getAllPerformedWorksByEngineerAuthIdAndDate(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllPerformedWorksByEngineerAuthIdAndDate$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllPerformedWorksByEngineerAuthIdAndDate(params: GetAllPerformedWorksByEngineerAuthIdAndDate$Params, context?: HttpContext): Observable<PageResponseAuthPerformedWorkDto> {
+    return this.getAllPerformedWorksByEngineerAuthIdAndDate$Response(params, context).pipe(
+      map((r: StrictHttpResponse<PageResponseAuthPerformedWorkDto>): PageResponseAuthPerformedWorkDto => r.body)
     );
   }
 
