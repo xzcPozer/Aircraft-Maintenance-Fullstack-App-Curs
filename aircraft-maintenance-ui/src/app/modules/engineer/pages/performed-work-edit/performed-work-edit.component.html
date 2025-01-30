@@ -1,0 +1,117 @@
+<div class="form-container">
+  <h2 class="form-title">Форма обновления выполненной работы</h2>
+
+  <div
+    *ngIf="errorMsg.length"
+    class="alert alert-danger"
+    role="alert"
+  >
+    <p *ngFor="let msg of errorMsg">{{msg}}</p>
+  </div>
+
+  <form (ngSubmit)="updatePerformedWork()">
+    <div class="form-group">
+      <label for="workName" class="form-label">Название работы</label>
+      <div class="autocomplete">
+        <input
+          type="text"
+          id="workName"
+          class="form-input"
+          [(ngModel)]="performedWorkRequest.workName"
+          name="workName"
+          (input)="onWorkNameInput($event)"
+          (focus)="showCheckSuggestions = true"
+          required
+          autocomplete="off"
+        >
+        <div
+          class="suggestions-list"
+          *ngIf="showCheckSuggestions && filteredAircraftChecks.length > 0"
+        >
+          <div
+            class="suggestion-item"
+            *ngFor="let workName of filteredAircraftChecks"
+            (click)="selectWorkName(workName)"
+            [class.active]="workName === performedWorkRequest.workName"
+          >
+            {{workName}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="description" class="form-label">Описание</label>
+      <textarea
+        id="description"
+        class="form-input form-textarea"
+        [(ngModel)]="performedWorkRequest.description"
+        name="description"
+        required
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="completionDate" class="form-label">Дата выполнения</label>
+      <input
+        type="datetime-local"
+        id="completionDate"
+        class="form-input"
+        [(ngModel)]="performedWorkRequest.completionDate"
+        name="completionDate"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="result" class="form-label">Результат</label>
+      <select
+        id="result"
+        class="form-select"
+        [(ngModel)]="performedWorkRequest.result"
+        name="result"
+        required
+      >
+        <option value="" disabled selected>Выберите результат</option>
+        <option value="NORMAL">NORMAL</option>
+        <option value="EXCHANGE">EXCHANGE</option>
+        <option value="CRASH">CRASH</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="serialNumber" class="form-label">Серийный номер</label>
+      <div class="autocomplete">
+        <input
+          type="text"
+          id="serialNumber"
+          class="form-input"
+          [(ngModel)]="performedWorkRequest.airplaneSerialNumber"
+          name="serialNumber"
+          (input)="onSerialNumberInput($event)"
+          (focus)="showNumberSuggestions = true"
+          required
+          autocomplete="off"
+        >
+        <div
+          class="suggestions-list"
+          *ngIf="showNumberSuggestions && filteredSerialNumbers.length > 0"
+        >
+          <div
+            class="suggestion-item"
+            *ngFor="let serial of filteredSerialNumbers"
+            (click)="selectSerialNumber(serial)"
+            [class.active]="serial === performedWorkRequest.airplaneSerialNumber"
+          >
+            {{serial}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn" (click)="onCancel()">Отмена</button>
+      <button type="submit" class="btn primary">обновить</button>
+    </div>
+  </form>
+</div>

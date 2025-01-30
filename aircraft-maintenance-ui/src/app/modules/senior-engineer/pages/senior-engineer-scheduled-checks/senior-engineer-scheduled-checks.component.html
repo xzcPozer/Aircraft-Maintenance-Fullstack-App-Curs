@@ -1,0 +1,40 @@
+<app-menu-for-senior></app-menu-for-senior>
+<div
+  *ngIf="msg"
+  class="alert "
+  [class.alert-danger]="level==='error'"
+  [class.alert-success]="level==='success'"
+  role="alert"
+>
+  <p>{{msg}}</p>
+</div>
+
+<div class="controls">
+  <button class="btn" (click)="addScheduledCheck()">Добавить</button>
+</div>
+
+<div class="table">
+  <div class="table-header">
+    <div>Тип проверки</div>
+    <div>Статус</div>
+    <div>Плановая дата</div>
+    <div>Серийный номер</div>
+    <div>Действия</div>
+  </div>
+  <div class="table-row" *ngFor="let record of responseScheduledCheckDto.content">
+    <div>{{record.type}}</div>
+    <div>{{record.status}}</div>
+    <div>{{record.date | date:'dd-MM-yyyy HH:mm'}}</div>
+    <div>{{record.serialNumber}}</div>
+    <div>
+      <button class="btn small" (click)="editScheduledCheck(record)">Изменить</button>
+    </div>
+  </div>
+</div>
+
+<app-pagination
+  [currentPage]="page"
+  [totalPages]="pages"
+  (_page)="displayScheduledChecks($event)"
+>
+</app-pagination>

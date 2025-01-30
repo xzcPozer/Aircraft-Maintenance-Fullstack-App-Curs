@@ -25,6 +25,18 @@ export class KeycloakService {
     return this._profile;
   }
 
+  getRoles(): string[] {
+    return this.keycloak.realmAccess?.roles || [];
+  }
+
+  hasRole(role: string): boolean {
+    return this.getRoles().includes(role);
+  }
+
+  hasAnyRole(roles: string[]): boolean {
+    return roles.some(role => this.hasRole(role));
+  }
+
   constructor() {
   }
 

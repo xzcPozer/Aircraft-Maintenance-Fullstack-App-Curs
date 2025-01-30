@@ -1,0 +1,53 @@
+<app-menu></app-menu>
+<div
+  *ngIf="msg"
+  class="alert "
+  [class.alert-danger]="level==='error'"
+  [class.alert-success]="level==='success'"
+  role="alert"
+>
+  <p>{{msg}}</p>
+</div>
+
+<div class="controls">
+  <button class="btn primary" (click)="createReport()">Создать отчет</button>
+  <button class="btn" (click)="addPerformedWork()">Добавить</button>
+  <div class="search-group">
+    <input
+      type="date"
+      [(ngModel)]="searchDate"
+      class="date-input"
+      placeholder="дд-мм-гггг"
+    >
+    <button class="btn" (click)="resetSearch()">Сбросить</button>
+    <button class="btn primary" (click)="search()">Найти</button>
+  </div>
+</div>
+
+<div class="table">
+  <div class="table-header">
+    <div>Название работы</div>
+    <div>Описание</div>
+    <div>Дата выполнения</div>
+    <div>Результат</div>
+    <div>Серийный номер</div>
+    <div>Действия</div>
+  </div>
+  <div class="table-row" *ngFor="let record of performedWorkResponse.content">
+    <div>{{record.workName}}</div>
+    <div>{{record.description}}</div>
+    <div>{{record.completionDate | date:'dd-MM-yyyy HH:mm'}}</div>
+    <div>{{record.result}}</div>
+    <div>{{record.serialNumber}}</div>
+    <div>
+      <button class="btn small" (click)="editPerformedWork(record)">Изменить</button>
+    </div>
+  </div>
+</div>
+
+<app-pagination
+  [currentPage]="page"
+  [totalPages]="pages"
+  (_page)="displayPerformedWorks($event)"
+>
+</app-pagination>

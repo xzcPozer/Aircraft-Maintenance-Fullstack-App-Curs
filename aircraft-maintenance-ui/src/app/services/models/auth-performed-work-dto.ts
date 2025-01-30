@@ -5,6 +5,7 @@
 export interface AuthPerformedWorkDto {
   completionDate?: string;
   description?: string;
+  id?: number;
   result?: string;
   serialNumber?: string;
   workName?: string;

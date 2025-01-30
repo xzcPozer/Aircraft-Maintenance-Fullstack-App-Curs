@@ -4,6 +4,7 @@
 
 export interface ScheduledCheckDto {
   date?: string;
+  id?: number;
   serialNumber?: string;
   status?: 'PLANNED' | 'PROCESSING' | 'COMPLETED' | 'CANCELED';
   type?: 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'OVERHAUL' | 'POST_REPAIR' | 'PRE_FLIGHT' | 'POST_FLIGHT';

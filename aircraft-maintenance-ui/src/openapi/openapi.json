@@ -12,7 +12,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8088/api/v1",
+      "url": "http://localhost:8088",
       "description": "Local ENV"
     }
   ],
@@ -499,7 +499,7 @@
             "content": {
               "*/*": {
                 "schema": {
-                  "$ref": "#/components/schemas/ApiResponse"
+                  "$ref": "#/components/schemas/AuthPerformedWorkDTO"
                 }
               }
             }
@@ -631,6 +631,29 @@
         }
       }
     },
+    "/api/v1/airplanes/serial-numbers": {
+      "get": {
+        "tags": [
+          "Airplane"
+        ],
+        "operationId": "getAllAirplanesSerialNumber",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/airplanes/airplane/by/serial-number": {
       "get": {
         "tags": [
@@ -675,7 +698,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/AircraftCheck"
+                    "type": "string"
                   }
                 }
               }
@@ -839,6 +862,10 @@
       "ScheduledCheckDTO": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
           "type": {
             "type": "string",
             "enum": [
@@ -966,6 +993,10 @@
       "AuthPerformedWorkDTO": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
           "workName": {
             "type": "string"
           },
@@ -1020,6 +1051,10 @@
       "AirplaneDTO": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
           "serialNumber": {
             "type": "string"
           },
@@ -1062,159 +1097,6 @@
           },
           "last": {
             "type": "boolean"
-          }
-        }
-      },
-      "AircraftCheck": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "checkName": {
-            "type": "string"
-          },
-          "performedWork": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PerformedWork"
-            }
-          }
-        }
-      },
-      "Airplane": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "serialNumber": {
-            "type": "string"
-          },
-          "model": {
-            "type": "string"
-          },
-          "yearOfRelease": {
-            "type": "string",
-            "format": "date"
-          },
-          "performedWorks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PerformedWork"
-            }
-          },
-          "scheduledChecks": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ScheduledCheck"
-            }
-          }
-        }
-      },
-      "PerformedWork": {
-        "type": "object",
-        "properties": {
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "lastModifiedDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string"
-          },
-          "lastModifiedBy": {
-            "type": "string"
-          },
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "description": {
-            "type": "string"
-          },
-          "completionDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "result": {
-            "type": "string",
-            "enum": [
-              "NORMAL",
-              "EXCHANGE",
-              "CRASH"
-            ]
-          },
-          "aircraftCheck": {
-            "$ref": "#/components/schemas/AircraftCheck"
-          },
-          "airplane": {
-            "$ref": "#/components/schemas/Airplane"
-          },
-          "engineerId": {
-            "type": "string"
-          }
-        }
-      },
-      "ScheduledCheck": {
-        "type": "object",
-        "properties": {
-          "createdDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "lastModifiedDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "createdBy": {
-            "type": "string"
-          },
-          "lastModifiedBy": {
-            "type": "string"
-          },
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "type": {
-            "type": "string",
-            "enum": [
-              "DAILY",
-              "WEEKLY",
-              "MONTHLY",
-              "OVERHAUL",
-              "POST_REPAIR",
-              "PRE_FLIGHT",
-              "POST_FLIGHT"
-            ]
-          },
-          "date": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "status": {
-            "type": "string",
-            "enum": [
-              "PLANNED",
-              "PROCESSING",
-              "COMPLETED",
-              "CANCELED"
-            ]
-          },
-          "notificationSent": {
-            "type": "boolean"
-          },
-          "airplane": {
-            "$ref": "#/components/schemas/Airplane"
-          },
-          "engineerId": {
-            "type": "string"
           }
         }
       }

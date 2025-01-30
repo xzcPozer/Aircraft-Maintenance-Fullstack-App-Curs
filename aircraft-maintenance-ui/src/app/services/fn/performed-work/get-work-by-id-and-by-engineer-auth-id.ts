@@ -8,24 +8,24 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ApiResponse } from '../../models/api-response';
+import { AuthPerformedWorkDto } from '../../models/auth-performed-work-dto';
 
 export interface GetWorkByIdAndByEngineerAuthId$Params {
   performedWorkId: number;
 }
 
-export function getWorkByIdAndByEngineerAuthId(http: HttpClient, rootUrl: string, params: GetWorkByIdAndByEngineerAuthId$Params, context?: HttpContext): Observable<StrictHttpResponse<ApiResponse>> {
+export function getWorkByIdAndByEngineerAuthId(http: HttpClient, rootUrl: string, params: GetWorkByIdAndByEngineerAuthId$Params, context?: HttpContext): Observable<StrictHttpResponse<AuthPerformedWorkDto>> {
   const rb = new RequestBuilder(rootUrl, getWorkByIdAndByEngineerAuthId.PATH, 'get');
   if (params) {
     rb.path('performedWorkId', params.performedWorkId, {});
   }
 
   return http.request(
-    rb.build({ responseType: 'blob', accept: '*/*', context })
+    rb.build({ responseType: 'json', accept: 'application/json', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<ApiResponse>;
+      return r as StrictHttpResponse<AuthPerformedWorkDto>;
     })
   );
 }

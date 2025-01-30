@@ -1,0 +1,40 @@
+<app-menu-for-senior></app-menu-for-senior>
+<div
+  *ngIf="msg"
+  class="alert "
+  [class.alert-danger]="level==='error'"
+  [class.alert-success]="level==='success'"
+  role="alert"
+>
+  <p>{{msg}}</p>
+</div>
+
+<div class="controls">
+  <button class="btn primary" (click)="createReport()">Создать отчет</button>
+</div>
+
+<div class="table">
+  <div class="table-header">
+    <div>ID инженера</div>
+    <div>Название работы</div>
+    <div>Описание</div>
+    <div>Дата выполнения</div>
+    <div>Результат</div>
+    <div>Серийный номер</div>
+  </div>
+  <div class="table-row" *ngFor="let record of performedWorkDto.content">
+    <div>{{record.engineerId}}</div>
+    <div>{{record.workName}}</div>
+    <div>{{record.description}}</div>
+    <div>{{record.completionDate | date:'dd-MM-yyyy HH:mm'}}</div>
+    <div>{{record.result}}</div>
+    <div>{{record.serialNumber}}</div>
+  </div>
+</div>
+
+<app-pagination
+  [currentPage]="page"
+  [totalPages]="pages"
+  (_page)="displayPerformedWorks($event)"
+>
+</app-pagination>

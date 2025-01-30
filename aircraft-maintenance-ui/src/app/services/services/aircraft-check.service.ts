@@ -11,7 +11,6 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { AircraftCheck } from '../models/aircraft-check';
 import { getAllChecks } from '../fn/aircraft-check/get-all-checks';
 import { GetAllChecks$Params } from '../fn/aircraft-check/get-all-checks';
 
@@ -30,7 +29,7 @@ export class AircraftCheckService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllChecks$Response(params?: GetAllChecks$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<AircraftCheck>>> {
+  getAllChecks$Response(params?: GetAllChecks$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<string>>> {
     return getAllChecks(this.http, this.rootUrl, params, context);
   }
 
@@ -40,9 +39,9 @@ export class AircraftCheckService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getAllChecks(params?: GetAllChecks$Params, context?: HttpContext): Observable<Array<AircraftCheck>> {
+  getAllChecks(params?: GetAllChecks$Params, context?: HttpContext): Observable<Array<string>> {
     return this.getAllChecks$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<AircraftCheck>>): Array<AircraftCheck> => r.body)
+      map((r: StrictHttpResponse<Array<string>>): Array<string> => r.body)
     );
   }
 

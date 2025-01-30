@@ -1,0 +1,42 @@
+<app-menu></app-menu>
+<div
+  *ngIf="msg"
+  class="alert"
+  [class.alert-danger]="level==='error'"
+  [class.alert-success]="level==='success'"
+  role="alert"
+>
+  <p>{{msg}}</p>
+</div>
+
+<div class="controls">
+  <div class="search-group">
+    <input
+      type="text"
+      [(ngModel)]="serialNumber"
+      class="form-input"
+    >
+    <button class="btn" (click)="resetSearch()">Сбросить</button>
+    <button class="btn primary" (click)="searchByDate()">Найти</button>
+  </div>
+</div>
+
+<div class="table">
+  <div class="table-header">
+    <div>Модель</div>
+    <div>Дата производства</div>
+    <div>Серийный номер</div>
+  </div>
+  <div class="table-row" *ngFor="let record of airplaneDto.content">
+    <div>{{record.model}}</div>
+    <div>{{record.yearOfRelease | date:'dd-MM-yyyy'}}</div>
+    <div>{{record.serialNumber}}</div>
+  </div>
+</div>
+
+<app-pagination
+  [currentPage]="page"
+  [totalPages]="pages"
+  (_page)="displayPerformedWorks($event)"
+>
+</app-pagination>

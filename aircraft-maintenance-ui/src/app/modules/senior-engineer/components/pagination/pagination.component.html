@@ -1,0 +1,11 @@
+<div class="pagination">
+  <button class="btn" [disabled]="currentPage === 0" (click)="prevPage()">
+    &lt; Предыдущая
+  </button>
+  <span class="page-info">
+        Страница {{currentPage + 1}} из {{totalPages}}
+      </span>
+  <button class="btn" [disabled]="currentPage === totalPages - 1" (click)="nextPage()">
+    Следующая &gt;
+  </button>
+</div>

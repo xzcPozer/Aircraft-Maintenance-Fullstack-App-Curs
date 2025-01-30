@@ -12,6 +12,7 @@ import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
 import { ApiResponse } from '../models/api-response';
+import { AuthPerformedWorkDto } from '../models/auth-performed-work-dto';
 import { createPerformedWork } from '../fn/performed-work/create-performed-work';
 import { CreatePerformedWork$Params } from '../fn/performed-work/create-performed-work';
 import { createReportByPeriod } from '../fn/performed-work/create-report-by-period';
@@ -196,7 +197,7 @@ export class PerformedWorkService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getWorkByIdAndByEngineerAuthId$Response(params: GetWorkByIdAndByEngineerAuthId$Params, context?: HttpContext): Observable<StrictHttpResponse<ApiResponse>> {
+  getWorkByIdAndByEngineerAuthId$Response(params: GetWorkByIdAndByEngineerAuthId$Params, context?: HttpContext): Observable<StrictHttpResponse<AuthPerformedWorkDto>> {
     return getWorkByIdAndByEngineerAuthId(this.http, this.rootUrl, params, context);
   }
 
@@ -206,9 +207,9 @@ export class PerformedWorkService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  getWorkByIdAndByEngineerAuthId(params: GetWorkByIdAndByEngineerAuthId$Params, context?: HttpContext): Observable<ApiResponse> {
+  getWorkByIdAndByEngineerAuthId(params: GetWorkByIdAndByEngineerAuthId$Params, context?: HttpContext): Observable<AuthPerformedWorkDto> {
     return this.getWorkByIdAndByEngineerAuthId$Response(params, context).pipe(
-      map((r: StrictHttpResponse<ApiResponse>): ApiResponse => r.body)
+      map((r: StrictHttpResponse<AuthPerformedWorkDto>): AuthPerformedWorkDto => r.body)
     );
   }
 

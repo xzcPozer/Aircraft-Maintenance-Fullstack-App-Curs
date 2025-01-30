@@ -18,6 +18,8 @@ import { getAirplaneBySerialNumber } from '../fn/airplane/get-airplane-by-serial
 import { GetAirplaneBySerialNumber$Params } from '../fn/airplane/get-airplane-by-serial-number';
 import { getAllAirplanes } from '../fn/airplane/get-all-airplanes';
 import { GetAllAirplanes$Params } from '../fn/airplane/get-all-airplanes';
+import { getAllAirplanesSerialNumber } from '../fn/airplane/get-all-airplanes-serial-number';
+import { GetAllAirplanesSerialNumber$Params } from '../fn/airplane/get-all-airplanes-serial-number';
 import { PageResponseAirplaneDto } from '../models/page-response-airplane-dto';
 
 @Injectable({ providedIn: 'root' })
@@ -73,6 +75,31 @@ export class AirplaneService extends BaseService {
   getAirplaneById(params: GetAirplaneById$Params, context?: HttpContext): Observable<AirplaneDto> {
     return this.getAirplaneById$Response(params, context).pipe(
       map((r: StrictHttpResponse<AirplaneDto>): AirplaneDto => r.body)
+    );
+  }
+
+  /** Path part for operation `getAllAirplanesSerialNumber()` */
+  static readonly GetAllAirplanesSerialNumberPath = '/api/v1/airplanes/serial-numbers';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getAllAirplanesSerialNumber()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllAirplanesSerialNumber$Response(params?: GetAllAirplanesSerialNumber$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<string>>> {
+    return getAllAirplanesSerialNumber(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getAllAirplanesSerialNumber$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getAllAirplanesSerialNumber(params?: GetAllAirplanesSerialNumber$Params, context?: HttpContext): Observable<Array<string>> {
+    return this.getAllAirplanesSerialNumber$Response(params, context).pipe(
+      map((r: StrictHttpResponse<Array<string>>): Array<string> => r.body)
     );
   }
 

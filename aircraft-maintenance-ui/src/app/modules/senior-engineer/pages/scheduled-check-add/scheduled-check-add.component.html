@@ -1,0 +1,97 @@
+<div class="form-container">
+  <h2 class="form-title">Форма запланированной проверки</h2>
+
+  <div
+    *ngIf="errorMsg.length"
+    class="alert alert-danger"
+    role="alert"
+  >
+    <p *ngFor="let msg of errorMsg">{{msg}}</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="type" class="form-label">Тип проверки</label>
+      <select
+        id="type"
+        class="form-select"
+        [(ngModel)]="request.type"
+        name="type"
+        required
+      >
+        <option value="" disabled selected>Выберите результат</option>
+        <option value="DAILY">ежедневная</option>
+        <option value="WEEKLY">еженедельная</option>
+        <option value="MONTHLY">ежемесячная</option>
+        <option value="OVERHAUL">капитальная</option>
+        <option value="POST_REPAIR">после починки</option>
+        <option value="PRE_FLIGHT">перед полетом</option>
+        <option value="POST_FLIGHT">после полета</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="completionDate" class="form-label">Дата выполнения</label>
+      <input
+        type="datetime-local"
+        id="completionDate"
+        class="form-input"
+        [(ngModel)]="request.date"
+        name="completionDate"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="status" class="form-label">Статус проверки</label>
+      <select
+        id="status"
+        class="form-select"
+        [(ngModel)]="request.status"
+        name="status"
+        required
+      >
+        <option value="" disabled selected>Выберите результат</option>
+        <option value="PLANNED">запланировано</option>
+        <option value="PROCESSING">в процессе</option>
+        <option value="COMPLETED">завершена</option>
+        <option value="CANCELED">отменена</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="serialNumber" class="form-label">Серийный номер</label>
+      <div class="autocomplete">
+        <input
+          type="text"
+          id="serialNumber"
+          class="form-input"
+          [(ngModel)]="request.airplaneSerialNumber"
+          name="serialNumber"
+          (input)="onSerialNumberInput($event)"
+          (focus)="showNumberSuggestions = true"
+          required
+          autocomplete="off"
+        >
+        <div
+          class="suggestions-list"
+          *ngIf="showNumberSuggestions && filteredSerialNumbers.length > 0"
+        >
+          <div
+            class="suggestion-item"
+            *ngFor="let serial of filteredSerialNumbers"
+            (click)="selectSerialNumber(serial)"
+            [class.active]="serial === request.airplaneSerialNumber"
+          >
+            {{serial}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn" (click)="onCancel()">Отмена</button>
+      <button type="submit" class="btn primary">Добавить</button>
+    </div>
+  </form>
+</div>
