@@ -21,10 +21,6 @@ export class KeycloakService {
     return this._keycloak;
   }
 
-  get profile(): UserProfile | undefined {
-    return this._profile;
-  }
-
   getRoles(): string[] {
     return this.keycloak.realmAccess?.roles || [];
   }
@@ -53,9 +49,5 @@ export class KeycloakService {
 
   login(){
     return this.keycloak.login();
-  }
-
-  logout(){
-    return this.keycloak.logout({redirectUri: 'http:localhost:4200'})
   }
 }

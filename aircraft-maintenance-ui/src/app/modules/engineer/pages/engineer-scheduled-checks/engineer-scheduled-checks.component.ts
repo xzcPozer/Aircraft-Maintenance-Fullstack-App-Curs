@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {PageResponseAuthPerformedWorkDto} from "../../../../services/models/page-response-auth-performed-work-dto";
 import {PageResponseScheduledCheckDto} from "../../../../services/models/page-response-scheduled-check-dto";
 import {ScheduledCheckService} from "../../../../services/services/scheduled-check.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-engineer-scheduled-checks',

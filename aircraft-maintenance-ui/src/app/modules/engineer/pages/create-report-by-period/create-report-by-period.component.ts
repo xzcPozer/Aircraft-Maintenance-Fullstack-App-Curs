@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {PerformedWorkService} from "../../../../services/services/performed-work.service";
 import {Router} from "@angular/router";
-import {PerformedWorkRequest} from "../../../../services/models/performed-work-request";
 import {CreateReportByPeriodRequest} from "../../../../services/models/create-report-by-period-request";
 import {DataService} from "../../../../services/data-shared/data.service";
 

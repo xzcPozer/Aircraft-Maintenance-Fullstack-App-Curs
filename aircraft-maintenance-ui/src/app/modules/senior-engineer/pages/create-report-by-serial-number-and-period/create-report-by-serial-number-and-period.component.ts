@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {CreateReportByPeriodRequest} from "../../../../services/models/create-report-by-period-request";
 import {PerformedWorkService} from "../../../../services/services/performed-work.service";
 import {Router} from "@angular/router";
 import {DataService} from "../../../../services/data-shared/data.service";
