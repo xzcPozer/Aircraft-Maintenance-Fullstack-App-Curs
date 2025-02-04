@@ -14,7 +14,7 @@ export class EngineerScheduledChecksComponent implements OnInit{
   scheduledCheckDto: PageResponseScheduledCheckDto = {totalElements: 0};
   searchDate: string = '';
   page: number = 0;
-  size: number = 3;
+  size: number = 10;
   pages: any = [];
   isSearch = false;
 

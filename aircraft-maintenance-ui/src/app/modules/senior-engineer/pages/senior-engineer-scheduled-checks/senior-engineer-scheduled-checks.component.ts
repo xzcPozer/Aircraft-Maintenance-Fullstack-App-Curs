@@ -16,7 +16,7 @@ export class SeniorEngineerScheduledChecksComponent implements OnInit {
   level: 'success' | 'error' = 'success';
   responseScheduledCheckDto: PageResponseScheduledCheckDto = {totalElements: 0};
   page: number = 0;
-  size: number = 3;
+  size: number = 10;
   pages: any = [];
 
   constructor(

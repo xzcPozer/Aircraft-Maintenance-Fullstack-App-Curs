@@ -14,7 +14,7 @@ export class SeniorEngineerPerformedWorkComponent {
   level: 'success' | 'error' = 'success';
   performedWorkDto: PageResponsePerformedWorkDto = {totalElements: 0};
   page: number = 0;
-  size: number = 3;
+  size: number = 10;
   pages: any = [];
 
   constructor(
