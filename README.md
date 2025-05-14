@@ -118,6 +118,72 @@ docker compose up -d
 
 ![изображение](https://github.com/user-attachments/assets/17f16fab-f37f-4dee-8186-cb1c9bef8f04)
 
+если при отправке уведомления, инженер находится на сайте, то приходит уведомление
+
+![изображение](https://github.com/user-attachments/assets/c6c1bf8e-e8c9-475d-bbcd-7fc4fd5a04a6)
+
+в остальных случаях приходит сообщение на почту всем инженерам
+
+![изображение](https://github.com/user-attachments/assets/a251e9ce-76aa-4b02-adda-1e93221b79c8)
 
 #### Страница "самолеты"
 
+внешний вид
+
+![изображение](https://github.com/user-attachments/assets/d88edf91-782f-42fc-ac9a-3c670a2defab)
+
+поиск по серийному номеру
+
+![изображение](https://github.com/user-attachments/assets/76871eed-0988-4bd0-84c7-17e2bf9aadd1)
+
+ошибка
+
+![изображение](https://github.com/user-attachments/assets/dbd0a786-99e9-4ee9-b863-54904977e403)
+
+### Главный инженер
+
+#### Страница "запланированные проверки"
+
+внешнй вид
+
+![изображение](https://github.com/user-attachments/assets/b7177ed0-4659-4dc5-9c5a-98c0b85fa13a)
+
+если нажать кнопку `добавить`, то открывается страница для добавления выполненной работы
+
+![изображение](https://github.com/user-attachments/assets/c21152ac-1d19-4b1a-b3f3-f792afd9748d)
+
+если данные введены корректно, то происходит переход на страницу "запланированные проверки" и выводится сообщение, что проверка была добавлена
+
+каждый час отправляется сообщения о всех плановых проверках, если не было отправки сообщения
+
+![изображение](https://github.com/user-attachments/assets/d0446d99-7a65-4f48-b6b5-5f1a2b06f884)
+
+возможные ошибки
+
+![изображение](https://github.com/user-attachments/assets/7ffe9302-79d1-4b83-82e9-607ff5514475)
+
+при изменении можно поменять только время и стату проверки
+
+![изображение](https://github.com/user-attachments/assets/78a114f8-efa5-4d2c-9b14-1dfd7289f8c8)
+
+#### Страница "выполненные работы"
+
+здесь выводятся все выполненные работы у всех инженеров, а также их ID
+
+![изображение](https://github.com/user-attachments/assets/bfd65602-f390-4f99-a2a7-3c46cd6adbe2)
+
+если нажать кнопку `создать отчет`, то открывается форма для создания отчета, где можно создать отчет по всем выполненным работам у конкретного самолета за определенны период
+
+![изображение](https://github.com/user-attachments/assets/b2a72869-8be3-4d7b-a770-045cf85803f0)
+
+![изображение](https://github.com/user-attachments/assets/987a0426-1a4f-4d1e-ab39-9aab6dcaa2d7)
+
+все ошибки продуманы
+
+![изображение](https://github.com/user-attachments/assets/e9fc0caa-a47f-4675-9a1c-edb72b867be3)
+
+
+
+#### Страница "самолеты"
+
+такая же как и у инженера
